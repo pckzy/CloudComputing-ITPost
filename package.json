@@ -6,6 +6,6 @@
     "watch:css": "npx @tailwindcss/cli -i ./itpost/static/src/styles.css -o ./itpost/static/dist/styles.css --watch"
   },
   "devDependencies": {
-    "tailwindcss": "^4.1.14"
+    "tailwindcss": "^4.1.16"
   }
 }
