@@ -591,7 +591,7 @@ class AdminView(LoginRequiredMixin, PermissionRequiredMixin, View):
 
         request.session['return_to'] = request.path
 
-        users = User.objects.all().order_by('username')
+        users = User.objects.select_related('profile').all().order_by('username')
         context['user_count'] = users.count()
 
         if group_query:
