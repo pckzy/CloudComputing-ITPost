@@ -1,0 +1,203 @@
+[
+  {
+    "model": "auth.group",
+    "pk": 1,
+    "fields": {
+      "name": "Admin"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 2,
+    "fields": {
+      "name": "Professor"
+    }
+  },
+  {
+    "model": "auth.group",
+    "pk": 3,
+    "fields": {
+      "name": "Student"
+    }
+  },
+  { "model": "auth.group_permissions", "pk": 1, "fields": { "group": 2, "permission": 56 } },
+  { "model": "auth.group_permissions", "pk": 2, "fields": { "group": 2, "permission": 53 } },
+  { "model": "auth.group_permissions", "pk": 3, "fields": { "group": 2, "permission": 54 } },
+  { "model": "auth.group_permissions", "pk": 4, "fields": { "group": 2, "permission": 55 } },
+  { "model": "auth.group_permissions", "pk": 5, "fields": { "group": 3, "permission": 65 } },
+  { "model": "auth.group_permissions", "pk": 6, "fields": { "group": 3, "permission": 66 } },
+  { "model": "auth.group_permissions", "pk": 7, "fields": { "group": 3, "permission": 67 } },
+  { "model": "auth.group_permissions", "pk": 8, "fields": { "group": 3, "permission": 68 } },
+  { "model": "auth.group_permissions", "pk": 9, "fields": { "group": 3, "permission": 34 } },
+  { "model": "auth.group_permissions", "pk": 10, "fields": { "group": 3, "permission": 36 } },
+  { "model": "auth.group_permissions", "pk": 11, "fields": { "group": 3, "permission": 41 } },
+  { "model": "auth.group_permissions", "pk": 12, "fields": { "group": 3, "permission": 42 } },
+  { "model": "auth.group_permissions", "pk": 13, "fields": { "group": 3, "permission": 43 } },
+  { "model": "auth.group_permissions", "pk": 14, "fields": { "group": 3, "permission": 44 } },
+  { "model": "auth.group_permissions", "pk": 15, "fields": { "group": 3, "permission": 56 } },
+  { "model": "auth.group_permissions", "pk": 16, "fields": { "group": 2, "permission": 65 } },
+  { "model": "auth.group_permissions", "pk": 17, "fields": { "group": 2, "permission": 34 } },
+  { "model": "auth.group_permissions", "pk": 18, "fields": { "group": 2, "permission": 68 } },
+  { "model": "auth.group_permissions", "pk": 19, "fields": { "group": 2, "permission": 36 } },
+  { "model": "auth.group_permissions", "pk": 20, "fields": { "group": 2, "permission": 41 } },
+  { "model": "auth.group_permissions", "pk": 21, "fields": { "group": 2, "permission": 42 } },
+  { "model": "auth.group_permissions", "pk": 22, "fields": { "group": 2, "permission": 43 } },
+  { "model": "auth.group_permissions", "pk": 23, "fields": { "group": 2, "permission": 44 } },
+  { "model": "auth.group_permissions", "pk": 24, "fields": { "group": 1, "permission": 13 } },
+  {
+    "model": "posts.major",
+    "pk": 1,
+    "fields": {
+      "name": "Information Technology",
+      "code": "IT"
+    }
+  },
+  {
+    "model": "posts.major",
+    "pk": 2,
+    "fields": {
+      "name": "Data Science and Business Analytics",
+      "code": "DSBA"
+    }
+  },
+  {
+    "model": "posts.major",
+    "pk": 3,
+    "fields": {
+      "name": "Artificial Intelligence Technology",
+      "code": "AIT"
+    }
+  },
+  {
+    "model": "posts.major",
+    "pk": 4,
+    "fields": {
+      "name": "Business Information Technology",
+      "code": "BIT"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 1,
+    "fields": {
+      "name": "ประกาศสำคัญ",
+      "for_course": "false"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 2,
+    "fields": {
+      "name": "กิจกรรม",
+      "for_course": "false"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 3,
+    "fields": {
+      "name": "พูดคุย",
+      "for_course": "false"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 4,
+    "fields": {
+      "name": "ด่วน",
+      "for_course": "true"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 5,
+    "fields": {
+      "name": "สอบ",
+      "for_course": "true"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 6,
+    "fields": {
+      "name": "งาน",
+      "for_course": "true"
+    }
+  },
+  {
+    "model": "posts.posttype",
+    "pk": 7,
+    "fields": {
+      "name": "ทั่วไป",
+      "for_course": "true"
+    }
+  },
+  {
+    "model": "posts.specialization",
+    "pk": 1,
+    "fields": {
+      "name": "Software Engineer",
+      "major": "1"
+    }
+  },
+  {
+    "model": "posts.specialization",
+    "pk": 2,
+    "fields": {
+      "name": "Network",
+      "major": "1"
+    }
+  },
+  {
+    "model": "posts.specialization",
+    "pk": 3,
+    "fields": {
+      "name": "Multimedia",
+      "major": "1"
+    }
+  },
+  {
+    "model": "posts.specialization",
+    "pk": 4,
+    "fields": {
+      "name": "Data Analyst",
+      "major": "2"
+    }
+  },
+  {
+    "model": "posts.specialization",
+    "pk": 5,
+    "fields": {
+      "name": "Data Engineer",
+      "major": "2"
+    }
+  },
+  {
+    "model": "posts.yearoption",
+    "pk": 1,
+    "fields": {
+      "year": "1"
+    }
+  },
+  {
+    "model": "posts.yearoption",
+    "pk": 2,
+    "fields": {
+      "year": "2"
+    }
+  },
+  {
+    "model": "posts.yearoption",
+    "pk": 3,
+    "fields": {
+      "year": "3"
+    }
+  },
+  {
+    "model": "posts.yearoption",
+    "pk": 4,
+    "fields": {
+      "year": "4"
+    }
+  }
+]
