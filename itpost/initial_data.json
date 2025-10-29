@@ -81,7 +81,7 @@
     "pk": 1,
     "fields": {
       "name": "ประกาศสำคัญ",
-      "for_course": "false"
+      "for_course": false
     }
   },
   {
@@ -89,7 +89,7 @@
     "pk": 2,
     "fields": {
       "name": "กิจกรรม",
-      "for_course": "false"
+      "for_course": false
     }
   },
   {
@@ -97,7 +97,7 @@
     "pk": 3,
     "fields": {
       "name": "พูดคุย",
-      "for_course": "false"
+      "for_course": false
     }
   },
   {
@@ -105,7 +105,7 @@
     "pk": 4,
     "fields": {
       "name": "ด่วน",
-      "for_course": "true"
+      "for_course": true
     }
   },
   {
@@ -113,7 +113,7 @@
     "pk": 5,
     "fields": {
       "name": "สอบ",
-      "for_course": "true"
+      "for_course": true
     }
   },
   {
@@ -121,7 +121,7 @@
     "pk": 6,
     "fields": {
       "name": "งาน",
-      "for_course": "true"
+      "for_course": true
     }
   },
   {
@@ -129,7 +129,7 @@
     "pk": 7,
     "fields": {
       "name": "ทั่วไป",
-      "for_course": "true"
+      "for_course": true
     }
   },
   {
@@ -137,7 +137,7 @@
     "pk": 1,
     "fields": {
       "name": "Software Engineer",
-      "major": "1"
+      "major": 1
     }
   },
   {
@@ -145,7 +145,7 @@
     "pk": 2,
     "fields": {
       "name": "Network",
-      "major": "1"
+      "major": 1
     }
   },
   {
@@ -153,7 +153,7 @@
     "pk": 3,
     "fields": {
       "name": "Multimedia",
-      "major": "1"
+      "major": 1
     }
   },
   {
@@ -161,7 +161,7 @@
     "pk": 4,
     "fields": {
       "name": "Data Analyst",
-      "major": "2"
+      "major": 2
     }
   },
   {
@@ -169,35 +169,35 @@
     "pk": 5,
     "fields": {
       "name": "Data Engineer",
-      "major": "2"
+      "major": 2
     }
   },
   {
     "model": "posts.yearoption",
     "pk": 1,
     "fields": {
-      "year": "1"
+      "year": 1
     }
   },
   {
     "model": "posts.yearoption",
     "pk": 2,
     "fields": {
-      "year": "2"
+      "year": 2
     }
   },
   {
     "model": "posts.yearoption",
     "pk": 3,
     "fields": {
-      "year": "3"
+      "year": 3
     }
   },
   {
     "model": "posts.yearoption",
     "pk": 4,
     "fields": {
-      "year": "4"
+      "year": 4
     }
   }
 ]
