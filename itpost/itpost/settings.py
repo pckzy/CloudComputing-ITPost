@@ -14,6 +14,10 @@ from decouple import config
 import os
 from pathlib import Path
 
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,6 +52,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'posts',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -135,16 +140,90 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+
+
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='ap-southeast-1')
+
+# Check if all necessary AWS S3 environment variables are set
+AWS_S3_READY = (
+    AWS_ACCESS_KEY_ID is not None
+    and AWS_SECRET_ACCESS_KEY is not None
+    and AWS_STORAGE_BUCKET_NAME is not None
+    and AWS_S3_REGION_NAME is not None
+)
+
+
+print(f"!!! AWS_S3_READY IS: {AWS_S3_READY}") # ‼️ นี่คือบรรทัดตัดสิน
+print("==================================================")
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static'),
 ]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+if AWS_S3_READY:
+    # Configure AWS S3 settings
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    STORAGES = {
+        # สำหรับ Media/Default files
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "bucket_name": AWS_STORAGE_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+                "custom_domain": AWS_S3_CUSTOM_DOMAIN,
+                "location": "media",
+            }
+        },
+        # สำหรับ Static files (collectstatic)
+        "staticfiles": {
+            "BACKEND": "storages.backends.s3boto3.S3StaticStorage", # 👈 ใช้ S3StaticStorage
+            "OPTIONS": {
+                "bucket_name": AWS_STORAGE_BUCKET_NAME,
+                "region_name": AWS_S3_REGION_NAME,
+                "custom_domain": AWS_S3_CUSTOM_DOMAIN,
+                "location": "static",
+            }
+        }
+    }
+    
+    # ตั้งค่า URL ให้ตรงกัน
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+    # Static files (CSS, JavaScript, images)
+    # STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # # Media files (uploads)
+    # MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # # Optional: Cache control settings
+    # AWS_S3_OBJECT_PARAMETERS = {
+    #     'CacheControl': 'max-age=86400',
+    # }
+else:
+    # Fallback to default local storage
+    STATIC_URL = '/static/'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
