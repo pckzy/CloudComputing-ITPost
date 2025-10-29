@@ -203,7 +203,7 @@
                         <input type="hidden" name="csrfmiddlewaretoken" id="csrfToken" value="{{ csrf_token }}">
                         <div class="flex space-x-3">
                             <img class="w-10 h-10 rounded-full border-2 border-blue-100 object-cover" 
-                                 src="/media/{{ user.profile.image }}" alt="Your Avatar">
+                                 src="{{ user.profile.image.url }}" alt="Your Avatar">
                             <div class="flex-1 flex">
                                 <input 
                                     type="text" 

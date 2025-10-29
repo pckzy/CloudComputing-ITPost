@@ -109,7 +109,7 @@
             {% for post in posts %}
             <div id="post-{{ post.id }}" class="rounded-xl p-4 mb-6 bg-white shadow-lg">
                 <div class="flex items-center rounded-lg select-none">
-                    <img class="w-16 h-16 rounded-full border-4 border-gray-200 object-cover" src="{% if post.annonymous %} /media/profile/no-profile.png {% else %} /media/{{ post.created_by.profile.image }} {% endif %}" alt="{% if post.annonymous %}Profile{% else %}{{post.created_by.first_name}} Profile{% endif %}">
+                    <img class="w-16 h-16 rounded-full border-4 border-gray-200 object-cover" src="{% if post.annonymous %} {{ MEDIA_URL }}profile/no-profile.png {% else %} {{ post.created_by.profile.image.url }} {% endif %}" alt="{% if post.annonymous %}Profile{% else %}{{post.created_by.first_name}} Profile{% endif %}">
                     <div class="ml-3 flex-1">
                         <div class="">
                             {% if post.annonymous %}
@@ -269,7 +269,7 @@
                     <form id="commentForm">
                         <div class="flex space-x-3">
                             <img class="w-10 h-10 rounded-full border-2 border-blue-100 object-cover" 
-                                 src="/media/{{ user.profile.image }}" alt="Your Avatar">
+                                 src="{{ user.profile.image.url }}" alt="Your Avatar">
                             <div class="flex-1 flex">
                                 <input 
                                     type="text" 

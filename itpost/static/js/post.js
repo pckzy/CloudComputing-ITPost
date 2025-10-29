@@ -34,11 +34,12 @@ function openCommentModal(postId) {
                 commentList.innerHTML += commentHtml;
             } else {
             data.comments.forEach(comment => {
+                const imagePath = `https://itpost-kmitl-s3-bucket.s3.amazonaws.com/media/${comment.image}`;
                 const commentHtml = `
                     <div class="mb-3">
                         <div class="flex items-center space-x-3">
                             <img class="w-10 h-10 rounded-full border-2 border-blue-100 object-cover" 
-                                src="/media/${comment.image}" alt="User">
+                                src="${imagePath}" alt="User">
                             <div class="flex-1">
                                 <div class="flex items-baseline gap-2 mb-1">
                                     <a href="/profile/${comment.username}"><span class="font-medium text-gray-800 text-sm">${comment.user_full_name}</span></a>
@@ -88,13 +89,15 @@ function openCommentModal(postId) {
                         if (comment_count) {
                             comment_count.innerText = Number(comment_count.innerText) + 1
                         }
+                        
+                        const imagePath = `https://itpost-kmitl-s3-bucket.s3.amazonaws.com/media/${data.comment.image}`;
                         const comments_list = document.getElementById('comments-list')
                         const newComment = document.createElement('div');
                         newComment.className = 'mb-3';
                         newComment.innerHTML = `
                             <div class="flex items-center space-x-3">
                                 <img class="w-10 h-10 rounded-full border-2 border-blue-100 object-cover" 
-                                    src="/media/${data.comment.image}" alt="User">
+                                    src="${imagePath}" alt="User">
                                 <div class="flex-1">
                                     <div class="flex items-baseline gap-2 mb-1">
                                         <a href="/profile/${data.comment.username}"><span class="font-medium text-gray-800 text-sm">${data.comment.user_full_name}</span></a>

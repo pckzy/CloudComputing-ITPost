@@ -30,7 +30,7 @@
         {% for post in pending_posts %}
         <div id="pending-post-{{ post.id }}" class="rounded-xl p-4 my-3 mx-6 bg-white shadow-lg">
             <div class="flex items-center rounded-lg">
-                <img class="w-16 h-16 rounded-full border-4 border-gray-200 object-cover" src="{% if post.annonymous %} {{ MEDIA_URL }}profile/no-profile.png {% else %} /media/{{ post.created_by.profile.image }} {% endif %}" alt="Profile">
+                <img class="w-16 h-16 rounded-full border-4 border-gray-200 object-cover" src="{% if post.annonymous %} {{ MEDIA_URL }}profile/no-profile.png {% else %} {{ post.created_by.profile.image.url }} {% endif %}" alt="Profile">
                 <div class="ml-3 flex-1">
                     <div class="">
                         {% if post.annonymous %}
