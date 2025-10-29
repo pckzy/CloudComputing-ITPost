@@ -7,3 +7,35 @@ psycopg2-binary==2.9.11
 python-decouple==3.8
 sqlparse==0.5.3
 tzdata==2025.2
+
+
+
+# [Unit]
+# Description=gunicorn daemon
+# After=network.target
+
+# [Service]
+# User=ubuntu
+# Group=www-data
+# WorkingDirectory=/home/ubuntu/CloudComputing-ITPost
+# ExecStart=/home/ubuntu/CloudComputing-ITPost/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/ubuntu/CloudComputing-ITPost.sock itpost.wsgi:application
+
+# [Install]
+# WantedBy=multi-user.target
+
+
+# server {
+#     listen 80;
+#     server_name 3.1.25.70;
+
+#     location = /favicon.ico { access_log off; log_not_found off; }
+#     location /static/ {
+#         root /home/ubuntu/CloudComputing-ITPost;
+#     }
+
+#     location / {
+#         include proxy_params;
+#         proxy_pass http://unix:/home/ubuntu/CloudComputing-ITPost.sock;
+#     }
+# }
+
