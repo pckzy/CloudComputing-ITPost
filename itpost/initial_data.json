@@ -3,49 +3,21 @@
     "model": "auth.group",
     "pk": 1,
     "fields": {
-      "name": "Admin",
-      "permissions": [
-        ["auth", "add_user", "user"]
-      ]
+      "name": "Admin"
     }
   },
   {
     "model": "auth.group",
     "pk": 2,
     "fields": {
-      "name": "Professor",
-      "permissions": [
-        ["posts", "add_post", "post"],
-        ["posts", "change_post", "post"],
-        ["posts", "delete_post", "post"],
-        ["posts", "view_post", "post"],
-        ["posts", "add_course", "course"],
-        ["posts", "change_course", "course"],
-        ["posts", "delete_course", "course"],
-        ["posts", "view_course", "course"],
-        ["posts", "add_comment", "comment"],
-        ["posts", "view_comment", "comment"],
-        ["posts", "change_profile", "profile"],
-        ["posts", "view_profile", "profile"]
-      ]
+      "name": "Professor"
     }
   },
   {
     "model": "auth.group",
     "pk": 3,
     "fields": {
-      "name": "Student",
-      "permissions": [
-        ["posts", "add_post", "post"],
-        ["posts", "change_post", "post"],
-        ["posts", "delete_post", "post"],
-        ["posts", "view_post", "post"],
-        ["posts", "view_course", "course"],
-        ["posts", "add_comment", "comment"],
-        ["posts", "view_comment", "comment"],
-        ["posts", "change_profile", "profile"],
-        ["posts", "view_profile", "profile"]
-      ]
+      "name": "Student"
     }
   },
   {
