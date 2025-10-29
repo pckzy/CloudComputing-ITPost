@@ -14,9 +14,25 @@ from decouple import config
 import os
 from pathlib import Path
 
+import boto3
+import json
+
 from dotenv import load_dotenv
 
 load_dotenv()
+
+ssm_client = boto3.client('ssm', region_name='ap-southeast-1')
+
+def get_secret(secret_name):
+    try:
+        response = ssm_client.get_parameter(
+            Name=secret_name,
+            WithDecryption=True
+        )
+        return response['Parameter']['Value']
+    except Exception as e:
+        print(f"ERROR: ไม่สามารถดึงค่า {secret_name} จาก SSM ได้: {e}")
+        return None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +48,8 @@ LOGIN_URL = '/login/'
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+# SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = get_secret('/itpost/prod/SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
@@ -96,10 +113,15 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 # Fetch environment variables for PostgreSQL
-POSTGRES_DB = os.getenv("POSTGRES_DB")
-POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
-POSTGRES_USER = os.getenv("POSTGRES_USER")
-POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+# POSTGRES_DB = os.getenv("POSTGRES_DB")
+# POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+# POSTGRES_USER = os.getenv("POSTGRES_USER")
+# POSTGRES_HOST = os.getenv("POSTGRES_HOST")
+# POSTGRES_PORT = os.getenv("POSTGRES_PORT", default='5432')
+POSTGRES_DB = get_secret('/itpost/prod/DB_NAME')
+POSTGRES_PASSWORD = get_secret('/itpost/prod/DB_PASSWORD')
+POSTGRES_USER = get_secret('/itpost/prod/DB_USER')
+POSTGRES_HOST = get_secret('/itpost/prod/DB_HOST')
 POSTGRES_PORT = os.getenv("POSTGRES_PORT", default='5432')
 
 # Check if PostgreSQL environment variables are set
@@ -184,8 +206,10 @@ USE_TZ = True
 
 
 
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+# AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_ACCESS_KEY_ID = get_secret('/itpost/prod/AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_secret('/itpost/prod/AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='ap-southeast-1')
 
