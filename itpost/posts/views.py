@@ -323,7 +323,7 @@ class CourseDetailView(LoginRequiredMixin, View):
                 return redirect('/')
 
 
-        posts = course.posts.filter(status='approved')
+        posts = course.posts.filter(status='approved').filter('-last_updated')
 
         filter = request.GET.get('filter')
         if filter:

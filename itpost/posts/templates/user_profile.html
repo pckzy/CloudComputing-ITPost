@@ -172,7 +172,7 @@
                                         <div class="">
                                             <h4 class="text-base font-semibold text-gray-800 mb-1">{{ post.title }}</h4>
                                         </div>
-                                        <p class="text-sm text-gray-600 mb-2">{{ post.content }}</p>
+                                        <p class="text-sm text-gray-600 mb-2">{{ post.content|urlize|linebreaks }}</p>
                                         <div class="flex items-center space-x-1">
                                             {% if post.course %}
                                                 <span class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded mr-2">{{ post.course.course_code }}</span>
@@ -291,7 +291,7 @@
                                                 {% endif %}
                                             </button>
                                         </div>
-                                        <p class="text-sm text-gray-600 mb-2">{{ post.content }}</p>
+                                        <p class="text-sm text-gray-600 mb-2">{{ post.content|urlize|linebreaks }}</p>
                                         <div class="flex items-center space-x-1">
                                             {% if post.course %}
                                                 <span class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded mr-2">{{ post.course.course_code }}</span>
