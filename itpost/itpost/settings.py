@@ -23,16 +23,19 @@ load_dotenv()
 
 ssm_client = boto3.client('ssm', region_name='ap-southeast-1')
 
-def get_secret(secret_name):
+def get_secret(secret_name, default=None):
     try:
         response = ssm_client.get_parameter(
             Name=secret_name,
             WithDecryption=True
         )
         return response['Parameter']['Value']
+    except ssm_client.exceptions.ParameterNotFound:
+        print(f"WARNING: ไม่พบ parameter {secret_name}, ใช้ค่า default: {default}")
+        return default
     except Exception as e:
         print(f"ERROR: ไม่สามารถดึงค่า {secret_name} จาก SSM ได้: {e}")
-        return None
+        return default
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,7 +55,8 @@ LOGIN_URL = '/login/'
 SECRET_KEY = get_secret('/itpost/prod/SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG", default=False, cast=bool)
+# DEBUG = config("DEBUG", default=False, cast=bool)
+DEBUG = get_secret('/itpost/prod/DEBUG', default='false').lower() == 'true'
 
 ALLOWED_HOSTS = ['47.129.56.120', '127.0.0.1', '18.141.179.6']
 
@@ -122,7 +126,8 @@ POSTGRES_DB = get_secret('/itpost/prod/DB_NAME')
 POSTGRES_PASSWORD = get_secret('/itpost/prod/DB_PASSWORD')
 POSTGRES_USER = get_secret('/itpost/prod/DB_USER')
 POSTGRES_HOST = get_secret('/itpost/prod/DB_HOST')
-POSTGRES_PORT = os.getenv("POSTGRES_PORT", default='5432')
+# POSTGRES_PORT = os.getenv("POSTGRES_PORT", default='5432')
+POSTGRES_PORT = get_secret('/itpost/prod/DB_PORT', default='5432')
 
 # Check if PostgreSQL environment variables are set
 POSTGRES_READY = (
@@ -210,8 +215,9 @@ USE_TZ = True
 # AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_ACCESS_KEY_ID = get_secret('/itpost/prod/AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_secret('/itpost/prod/AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='ap-southeast-1')
+AWS_STORAGE_BUCKET_NAME = get_secret('/itpost/prod/AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = get_secret('/itpost/prod/AWS_S3_REGION_NAME', default='ap-southeast-1')
+# AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME', default='ap-southeast-1')
 
 # Check if all necessary AWS S3 environment variables are set
 AWS_S3_READY = (
