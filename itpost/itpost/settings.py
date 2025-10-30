@@ -58,7 +58,7 @@ SECRET_KEY = get_secret('/itpost/prod/SECRET_KEY')
 # DEBUG = config("DEBUG", default=False, cast=bool)
 DEBUG = get_secret('/itpost/prod/DEBUG', default='false').lower() == 'true'
 
-ALLOWED_HOSTS = ['47.129.56.120', '127.0.0.1', '18.141.179.6']
+ALLOWED_HOSTS = ['47.129.56.120', '127.0.0.1', '18.141.179.6', '54.169.125.96']
 
 
 # Application definition
