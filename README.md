@@ -28,6 +28,24 @@
 * **Cloud Architecture:** ติดตั้งระบบบน AWS โดยใช้ EC2 สำหรับประมวลผล, RDS สำหรับฐานข้อมูล และ S3 สำหรับจัดเก็บไฟล์ Static ต่างๆ.
 * **Security & IAM:** กำหนดสิทธิ์การเข้าถึงทรัพยากรบน Cloud ด้วย IAM Roles และจัดการ Environment Variables เพื่อความปลอดภัยของข้อมูล.
 
+## 🏗 System Architecture (AWS Infrastructure)
+เพื่อให้เห็นภาพการทำงานเบื้องหลังของระบบทั้งหมด นี่คือไดอะแกรมการวางระบบบน Cloud:
+
+<p align="center">
+  <img src="screenshots/aws-infrastructure.png" width="800" alt="AWS Infrastructure Diagram">
+</p>
+<p align="center">
+  <em>Infrastructure Diagram แสดงการทำงานร่วมกันของ EC2, RDS, S3 และระบบ Automated Recovery</em>
+</p>
+
+### ☁️ Infrastructure Components:
+* **Compute:** **Amazon EC2** ทำหน้าที่ประมวลผลแอปพลิเคชัน Django.
+* **Database:** **Amazon RDS (PostgreSQL)** ใช้จัดการข้อมูลประกาศและผู้ใช้งานอย่างเป็นระบบ.
+* **Storage:** **Amazon S3** สำหรับเก็บ Static และ Media Assets ทั้งหมด.
+* **Security:** ใช้งาน **IAM Roles** ในการควบคุมสิทธิ์การเข้าถึงทรัพยากรต่างๆ อย่างเข้มงวด.
+
+---
+
 ## 🛠 Advanced Technical Highlight: Automated Fault Tolerance
 หนึ่งในฟีเจอร์สำคัญของโปรเจกต์นี้คือการทำ **Automated EC2 Recovery Workflow** เพื่อเพิ่ม Availability ให้กับระบบ:
 * ใช้ **EventBridge** ในการตรวจจับสถานะของ Instance.
